@@ -95,8 +95,7 @@ public class UserService {
  			return null;
  		} 
  		Optional<User> user = userRepo.findByUsernameOrEmail(newLogin.getUsername(), newLogin.getUsername());
- 		System.out.println(user+" this is user");
- 		if (user == null) {
+ 		if (!user.isPresent()) {
  			result.rejectValue("username", "Unique", "Invalid email or password");
  		}
  		if(result.hasErrors()) {
@@ -108,6 +107,7 @@ public class UserService {
  		if(result.hasErrors()) {
  			return null;
  		} 
+ 		System.out.println(user+" this is user");
  		return user.get();
  	}
  	

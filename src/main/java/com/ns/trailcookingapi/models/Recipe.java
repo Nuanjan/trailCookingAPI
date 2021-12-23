@@ -31,7 +31,6 @@ public class Recipe {
 	@Size(min=2,max=250, message="Name cannot be short less than 2 or greater than 250 characters!")
 	private String recipeName;
 	
-	@NotBlank(message="Description is Required!")
 	@Size(min=5, message="Description cannot be short less than 5 characters!")
 	private String description;
 	

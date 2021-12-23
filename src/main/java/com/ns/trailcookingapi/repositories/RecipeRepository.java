@@ -10,6 +10,8 @@ import com.ns.trailcookingapi.models.Recipe;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	List<Recipe> findAll();
 	Optional<Recipe> findById(Long id);
+	List<Recipe> findByUser_Id(Long id);
+
 	void deleteById(Long id);
 
 }
