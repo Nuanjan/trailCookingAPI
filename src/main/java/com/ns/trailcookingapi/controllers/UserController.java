@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ import com.ns.trailcookingapi.services.UserService;
 
 
 
-//@CrossOrigin(origins= "http://localhost:3000")
+@CrossOrigin(origins= "http://localhost:3000")
 @RequestMapping("/api/user")
 @RestController
 public class UserController {

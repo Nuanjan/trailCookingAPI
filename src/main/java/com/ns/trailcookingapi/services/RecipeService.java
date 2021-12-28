@@ -18,9 +18,9 @@ public class RecipeService {
 		this.recipeRepo = recipeRepo;
 		this.userRepo = userRepo;
 	}
-	public List<Recipe> findUserRecipes(Long id) {
-		return recipeRepo.findByUser_Id(id);
-	}
+//	public List<Recipe> findUserRecipes(Long id) {
+//		return recipeRepo.fin(id);
+//	}
 	
 	public List<Recipe> allRecipes(){
 		return recipeRepo.findAll();

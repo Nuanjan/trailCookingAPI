@@ -2,7 +2,6 @@ package com.ns.trailcookingapi.models;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -95,7 +94,8 @@ public class User {
         this.updatedAt = new Date();
     }
  // ====================== Related Data - 1:n ==================================================
-    @OneToMany(mappedBy="user",fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Recipe> recipes;
   
 
@@ -103,31 +103,22 @@ public class User {
 
     }
 
-    public User(String firstname,String lastname, String username, String email, String password) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    
-    
-    
-    
-  public User(Long id,
+    public User(
 			@NotBlank(message = "First Name must not be blank") @Size(min = 2, max = 40, message = "First Name must be between 2 and 40 characters") String firstname,
 			@NotBlank(message = "Last Name must not be blank") @Size(min = 2, max = 40, message = "Last Name must be between 2 and 40 characters") String lastname,
 			@NotBlank(message = "User Name is required!") @Size(min = 3, max = 15, message = "User Name must be between 2 and 40 characters") String username,
 			@NotBlank(message = "Email is required!") @Size(min = 6, max = 40, message = "Email must be between 6 and 40 characters") @Email String email,
-			@NotBlank(message = "Password is required!") @Size(max = 128) String password) {
-		super();
-		this.id = id;
+			@NotBlank(message = "Password is required!") @Size(max = 128) String password,
+			@NotNull(groups = Confirm.class) @Size(min = 6, max = 128, message = "Confirm Password must be between 6 and 128 characters") String confirm,
+			List<Role> roles, List<Recipe> recipes) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.confirm = confirm;
+		this.roles = roles;
+		this.recipes = recipes;
 	}
 
 // ============================== Getter and Setter =========================================
@@ -202,4 +193,25 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	// override default method of Object method toString to make it print value instead of memory address.
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username
+				+ ", email=" + email + ", password=" + password + ", roles=" + roles + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", recipes=" + recipes + "]";
+	}
+    
+    
 }
